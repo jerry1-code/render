@@ -1,302 +1,400 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的导航页</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('http://files.unn.pp.ua/download/pictures%2Fbackground.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .header {
-            color: #fff;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .search-container {
-            padding: 3rem;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 20px;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 15px 18px;
-            font-size: 20px;
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-        }
-        
-        .link-item {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 12px;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            height: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .link-item:hover {
-            background-color: rgba(255, 255, 255, 0.85);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        }
-        
-        .link-item a {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-        }
-        
-        .link-icon {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 8px;
-            object-fit: contain;
-        }
-        
-        .link-text {
-            font-size: 14px;
-            text-align: center;
-            word-break: break-word;
-            max-width: 100%;
-        }
-        .foot_marker {
-            position: fixed;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-            color: rgba(255,255,255,0.8);
-            z-index: 999;
-            padding: 10px 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>保护水资源 | 从今天开始</title>
+  <style>
+    :root{
+      --bg: #071826;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --text: #e9f4ff;
+      --muted: rgba(233,244,255,.75);
+      --accent: #4dd4ff;
+      --accent2:#48ffb5;
+      --warn:#ffd166;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(77,212,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 30%, rgba(72,255,181,.16), transparent 55%),
+        radial-gradient(900px 600px at 50% 100%, rgba(255,209,102,.10), transparent 60%),
+        linear-gradient(180deg, #061524, #04101b 60%, #030b12);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 56px}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 18px;
+      background: linear-gradient(135deg, rgba(77,212,255,.15), rgba(72,255,181,.10));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 10;
+    }
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+                  linear-gradient(135deg, rgba(77,212,255,.9), rgba(72,255,181,.85));
+      box-shadow: 0 10px 30px rgba(77,212,255,.15);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-20%;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.45), transparent 55%);
+      transform: rotate(20deg);
+      opacity:.65;
+    }
+    .brand h1{font-size:16px; margin:0; letter-spacing:.5px}
+    .brand p{margin:2px 0 0; color:var(--muted); font-size:12px}
+    nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .chip{
+      padding:8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-size: 13px;
+      transition: .18s ease;
+      user-select:none;
+    }
+    .chip:hover{transform: translateY(-1px); border-color: rgba(77,212,255,.55); background: rgba(77,212,255,.10)}
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.14);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .heroMain{padding:26px}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:7px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(77,212,255,.12);
+    }
+    h2{margin:14px 0 8px; font-size: 34px; line-height:1.1}
+    .lead{margin:0; color:var(--muted); font-size: 15px; line-height:1.75}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding:10px 14px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 14px;
+      transition: .18s ease;
+    }
+    .btnPrimary{
+      border-color: rgba(77,212,255,.55);
+      background: linear-gradient(135deg, rgba(77,212,255,.25), rgba(72,255,181,.18));
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .heroSide{padding:18px 18px 22px; position:relative; overflow:hidden}
+    .heroSide h3{margin:2px 0 10px; font-size:16px}
+    .meter{
+      display:flex; flex-direction:column; gap:10px;
+      margin-top: 10px;
+    }
+    .bar{
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.10);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .bar > i{
+      display:block; height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .5s ease;
+    }
+    .meterRow{display:flex; justify-content:space-between; color:var(--muted); font-size:12px}
+    .tip{
+      margin-top:14px;
+      padding:12px 12px;
+      border-radius: 14px;
+      background: rgba(255,209,102,.10);
+      border: 1px solid rgba(255,209,102,.25);
+      color: rgba(233,244,255,.9);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    section{margin-top:16px}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .mini{padding:16px}
+    .mini h4{margin:4px 0 8px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); font-size: 13px; line-height:1.7}
+    .icon{
+      width:36px; height:36px; border-radius:12px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .actions{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .checklist{padding:18px}
+    .checklist h3{margin:0 0 10px}
+    ul{margin:0; padding-left: 18px; color: var(--muted); line-height:1.9}
+    .calc{padding:18px}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    label{font-size:13px; color: var(--muted)}
+    input[type="number"]{
+      width: 160px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+    }
+    .result{
+      margin-top:10px;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(77,212,255,.22);
+      background: rgba(77,212,255,.08);
+      color: rgba(233,244,255,.92);
+      font-size: 13px;
+      line-height: 1.7;
+      min-height: 52px;
+    }
+    footer{
+      margin-top:20px;
+      color: rgba(233,244,255,.55);
+      font-size: 12px;
+      text-align:center;
+    }
 
-        .foot_marker a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-
-        .foot_marker a:hover {
-            color: #4388e0;
-        }        
-    </style>
+    @media (max-width: 920px){
+      .hero{grid-template-columns: 1fr}
+      .actions{grid-template-columns: 1fr}
+      .grid3{grid-template-columns: 1fr}
+      header{position:static}
+      h2{font-size: 28px}
+    }
+  </style>
 </head>
+
 <body>
-    <div class="search-container">
-        <form action="https://www.google.com/search" method="get" target="_blank">
-            <input class="search-box" type="text" name="q" placeholder="Google 搜索...">
-        </form>
-    </div>
-    
-    <div class="container">
-        <!-- 第一行 -->
-        <div class="link-item">
-            <a href="https://www.google.com" target="_blank">
-                <img class="link-icon" src="https://www.google.com/favicon.ico" alt="Google">
-                <span class="link-text">Google</span>
-            </a>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>保护水资源</h1>
+          <p>节水、减污、护源——把水留给未来</p>
         </div>
-        <div class="link-item">
-            <a href="https://www.baidu.com" target="_blank">
-                <img class="link-icon" src="https://www.baidu.com/favicon.ico" alt="Baidu">
-                <span class="link-text">Baidu</span>
-            </a>
+      </div>
+      <nav>
+        <a class="chip" href="#why">为什么重要</a>
+        <a class="chip" href="#do">我们能做什么</a>
+        <a class="chip" href="#calc">节水估算</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <section class="card heroMain" id="top">
+          <div class="kicker"><span class="dot"></span>从一滴水开始，改变一座城</div>
+          <h2>让每一滴水，都有价值。</h2>
+          <p class="lead">
+            水资源不是“用完再来”的东西。减少浪费、降低污染、保护水源地，
+            不是口号，而是每天生活里的选择：一次随手关紧水龙头、一瓶少买的化学清洁剂、
+            一次主动的垃圾分类与回收。
+          </p>
+          <div class="ctaRow">
+            <button class="btn btnPrimary" id="btnPledge">我承诺从今天开始</button>
+            <button class="btn" id="btnRandom">给我一条行动建议</button>
+          </div>
+          <p class="lead" id="msg" style="margin-top:12px;"></p>
+        </section>
+
+        <aside class="card heroSide" aria-label="节水进度">
+          <h3>你的节水行动进度</h3>
+
+          <div class="meter">
+            <div>
+              <div class="meterRow"><span>随手关水</span><span id="v1">0%</span></div>
+              <div class="bar"><i id="b1"></i></div>
+            </div>
+            <div>
+              <div class="meterRow"><span>减少污染</span><span id="v2">0%</span></div>
+              <div class="bar"><i id="b2"></i></div>
+            </div>
+            <div>
+              <div class="meterRow"><span>重复利用</span><span id="v3">0%</span></div>
+              <div class="bar"><i id="b3"></i></div>
+            </div>
+          </div>
+
+          <div class="tip" id="tipBox">
+            试试：用盆接水洗菜，再用这盆水拖地或冲马桶。
+          </div>
+        </aside>
+      </div>
+
+      <section id="why" class="grid3" aria-label="为什么保护水资源重要">
+        <div class="card mini">
+          <div class="icon" aria-hidden="true">💧</div>
+          <h4>水是有限资源</h4>
+          <p>可用的淡水并不多，浪费意味着更高的取水与处理成本，也意味着更脆弱的生态系统。</p>
         </div>
-        <div class="link-item">
-            <a href="https://www.youtube.com" target="_blank">
-                <img class="link-icon" src="https://www.youtube.com/favicon.ico" alt="YouTube">
-                <span class="link-text">Youtube</span>
-            </a>
+        <div class="card mini">
+          <div class="icon" aria-hidden="true">🏞️</div>
+          <h4>污染更难恢复</h4>
+          <p>一条河的污染治理往往需要多年。减少油污、化学品与垃圾进入水体，比事后治理更有效。</p>
         </div>
-        <div class="link-item">
-            <a href="https://mail.google.com/mail/u/0/" target="_blank">
-                <img class="link-icon" src="https://mail.google.com/favicon.ico" alt="Gmail">
-                <span class="link-text">Gmail</span>
-            </a>
+        <div class="card mini">
+          <div class="icon" aria-hidden="true">🏠</div>
+          <h4>每个人都能影响</h4>
+          <p>家庭用水、生活废弃物、洗涤用品选择，都会通过下水道回到水环境里。</p>
         </div>
-        <div class="link-item">
-            <a href="https://github.com" target="_blank">
-                <img class="link-icon" src="https://github.com/favicon.ico" alt="GitHub">
-                <span class="link-text">GitHub</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://ip.sb" target="_blank">
-                <img class="link-icon" src="https://ip.sb/favicon.ico" alt="IP SB">
-                <span class="link-text">ip.sb</span>
-            </a>
-        </div>
-        
-        <!-- 第二行 -->
-        <div class="link-item">
-            <a href="https://dash.cloudflare.com" target="_blank">
-                <img class="link-icon" src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare">
-                <span class="link-text">Cloudflare</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://chat.openai.com" target="_blank">
-                <img class="link-icon" src="https://chat.openai.com/favicon.ico" alt="ChatGPT">
-                <span class="link-text">Chatgpt</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://huggingface.co" target="_blank">
-                <img class="link-icon" src="https://huggingface.co/favicon.ico" alt="Hugging Face">
-                <span class="link-text">Huggingface</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://www.itdog.cn" target="_blank">
-                <i class="fas fa-network-wired link-icon"></i>
-                <span class="link-text">ITDOG - 在线ping</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://ping0.cc" target="_blank">
-                <i class="fas fa-database link-icon"></i>
-                <span class="link-text">Ping0</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="#" target="_blank">
-                <i class="fas fa-fingerprint link-icon"></i>
-                <span class="link-text">浏览器指纹</span>
-            </a>
-        </div>
-        
-        <!-- 第三行 -->
-        <div class="link-item">
-            <a href="https://ssss.nyc.mn" target="_blank">
-                <i class="fas fa-tachometer-alt link-icon"></i>
-                <span class="link-text">nezha面板</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://hoppscotch.io" target="_blank">
-                <img class="link-icon" src="https://discord.com/favicon.ico" alt="Discord">
-                <span class="link-text">Api测试</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://who.cx" target="_blank">
-                <i class="fas fa-globe link-icon"></i>
-                <span class="link-text">who.cx</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://www.domcomp.com" target="_blank">
-                <i class="fas fa-tags link-icon"></i>
-                <span class="link-text">域名比价</span>
-            </a>
-        </div>
-        
-        <div class="link-item">
-            <a href="https://www.nodeseek.com" target="_blank">
-                <i class="fas fa-server link-icon"></i>
-                <span class="link-text">NodeSeek</span>
-            </a>
-        </div>
-        <div class="link-item">
-            <a href="https://linux.do" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">Linux do</span>
-            </a>
-        </div>
-        
-        <!-- 第四行 -->
-        <div class="link-item">
-            <a href="https://music.gvrander.eu.org" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">在线音乐</span>
-            </a>           
-        </div>
-        <div class="link-item">
-            <a href="https://www.freereceivesms.com" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">免费接码</span>
-            </a> 
-        </div>
-        <div class="link-item">
-            <a href="https://sublink.eooce.com" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">订阅转换</span>
-            </a> 
-        </div>
-        <div class="link-item">
-            <a href="https://ssh.eooce.com" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">webssh</span>
-            </a> 
-        </div>
-        <div class="link-item">
-            <a href="https://filebox.nnuu.nyc.mn" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">文件快递柜</span>
-            </a> 
-        </div>
-        <div class="link-item">
-            <a href="https://address.nnuu.nyc.mn" target="_blank">
-                <i class="fab fa-linux link-icon"></i>
-                <span class="link-text">真实地址生成</span>
-            </a> 
+      </section>
+
+      <section id="do" class="actions" aria-label="我们能做什么">
+        <div class="card checklist">
+          <h3>日常可执行清单</h3>
+          <ul>
+            <li>刷牙/洗手打泡时关水，别让水白流。</li>
+            <li>洗菜用盆接水，尽量分次利用（拖地、冲洗）。</li>
+            <li>减少含磷/强刺激清洁剂用量，优先选择环保型产品。</li>
+            <li>厨房油污先擦后洗；废油别倒下水道。</li>
+            <li>洗衣集中洗、满桶洗；能冷水就不加热。</li>
+            <li>地漏/马桶漏水及时修，漏水是“隐形浪费”。</li>
+          </ul>
         </div>
 
-        <!-- 版权 -->
-        <div class="foot_marker">
-        <a href="https://github.com/eooce" target="_blank">Powered by eooce</a>
-    </div>
+        <div class="card calc" id="calc" aria-label="节水估算">
+          <h3>节水估算器</h3>
+          <div class="row" style="margin-top:6px;">
+            <label for="minutes">每天减少放水时间（分钟）</label>
+            <input id="minutes" type="number" min="0" step="1" value="3" />
+            <button class="btn btnPrimary" id="btnCalc">计算</button>
+          </div>
+          <div class="result" id="result">
+            输入你每天能省下的时间，看看一年大概能省多少水。
+          </div>
+          <p class="lead" style="margin-top:10px;">
+            说明：这里按“普通水龙头平均流量约 6 L/分钟”做粗略估算，实际因水压与龙头型号而异。
+          </p>
+        </div>
+      </section>
 
-    <script>
-        document.querySelectorAll('.link-item:not(.empty)').forEach(item => {
-            const icon = item.querySelector('img.link-icon');
-            if (icon) {
-                icon.onerror = function() {
-                    this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDJDNi40NzcgMiAyIDYuNDc3IDIgMTJzNC40NzcgMTAgMTAgMTAgMTAtNC40NzcgMTAtMTBTMTcuNTIzIDIgMTIgMnptMCAyYzQuNDE4IDAgOCAzLjU4MiA4IDhzLTMuNTgyIDgtOCA4LTgtMy41ODItOC04IDMuNTgyLTggOC04eiIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==';
-                }
-            }
-        });
-    </script>
+      <footer>
+        你不需要一次做到完美，只要持续做得更好。
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const tips = [
+      "用盆接水洗菜，再用这盆水拖地或冲马桶。",
+      "检查马桶是否漏水：滴几滴色素进水箱，10分钟后看马桶是否变色。",
+      "厨房废油用纸巾擦拭后再清洗，减少油污进入下水道。",
+      "洗衣尽量满桶洗，少用一次就是省水省电。",
+      "用喷头/起泡器替换直流水龙头，体感不变但更省水。"
+    ];
+
+    const suggestions = [
+      "今天就做一件小事：刷牙打泡时关水。",
+      "把洗菜水留着，用来冲洗拖把或冲马桶。",
+      "把废油装进废油瓶，别倒进下水道。",
+      "检查一次家里是否有滴漏：龙头、马桶、水管接头。",
+      "少用一点强力清洁剂，能擦洗就别长时间开水冲。"
+    ];
+
+    function setBars(a, b, c){
+      document.getElementById("b1").style.width = a + "%";
+      document.getElementById("b2").style.width = b + "%";
+      document.getElementById("b3").style.width = c + "%";
+      document.getElementById("v1").textContent = a + "%";
+      document.getElementById("v2").textContent = b + "%";
+      document.getElementById("v3").textContent = c + "%";
+    }
+
+    // 初始随机一个“进度感”
+    (function init(){
+      const a = 35 + Math.floor(Math.random()*35);
+      const b = 25 + Math.floor(Math.random()*40);
+      const c = 20 + Math.floor(Math.random()*45);
+      setBars(a,b,c);
+
+      document.getElementById("tipBox").textContent = "试试：" + tips[Math.floor(Math.random()*tips.length)];
+    })();
+
+    document.getElementById("btnPledge").addEventListener("click", () => {
+      const msg = "承诺不是压力，是方向：从今天开始，减少浪费、减少污染、重复利用。";
+      document.getElementById("msg").textContent = msg;
+      // 小幅提升“进度”
+      const v1 = Math.min(100, parseInt(document.getElementById("v1").textContent) + 8);
+      const v2 = Math.min(100, parseInt(document.getElementById("v2").textContent) + 6);
+      const v3 = Math.min(100, parseInt(document.getElementById("v3").textContent) + 7);
+      setBars(v1, v2, v3);
+    });
+
+    document.getElementById("btnRandom").addEventListener("click", () => {
+      document.getElementById("msg").textContent =
+        suggestions[Math.floor(Math.random()*suggestions.length)];
+    });
+
+    document.getElementById("btnCalc").addEventListener("click", () => {
+      const minutes = Number(document.getElementById("minutes").value || 0);
+      const flow = 6; // L/min 粗略估算
+      const perDay = minutes * flow;              // L/day
+      const perYear = perDay * 365;               // L/year
+      const m3 = perYear / 1000;                  // 立方米
+      const result = document.getElementById("result");
+
+      result.innerHTML =
+        "如果你每天少放水 <b>" + minutes + "</b> 分钟，按约 <b>" + flow +
+        "</b> L/分钟估算：<br/>" +
+        "一年大概能省 <b>" + Math.round(perYear).toLocaleString() + "</b> 升（约 <b>" +
+        (m3.toFixed(1)) + "</b> 立方米）。<br/>" +
+        "把它当成一个提醒：你的微小习惯，长期会变得很大。";
+    });
+  </script>
 </body>
 </html>
